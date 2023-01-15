@@ -1,0 +1,3 @@
+# pangolindemo
+
+> make demo

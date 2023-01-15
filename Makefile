@@ -1,15 +1,15 @@
 TAG_NAME:=pvphan/pangolin:0.1
+GUI_PREAMBLE:=sudo xhost +local:root
+GUI_FLAGS:= \
+	-e DISPLAY=${DISPLAY} \
+	-e QT_X11_NO_MITSHM=1 \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+	-v /dev:/dev:ro \
 
 shell: build
-	sudo xhost +local:root \
+	${GUI_PREAMBLE} \
 	&& docker run \
-		-e DISPLAY=$DISPLAY \
-		-e QT_X11_NO_MITSHM=1 \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		-v /dev:/dev:ro \
-		--gpus all
-		--name orb-3-container \
-		-p 8087:8087 \
+		${GUI_FLAGS} \
 		--privileged \
 		--rm -it \
 		${TAG_NAME} bash

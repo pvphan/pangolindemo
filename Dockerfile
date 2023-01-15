@@ -29,6 +29,5 @@ RUN export GIT_SSL_NO_VERIFY=1 \
 	&& cmake .. \
 	&& make -j8 \
 	&& cd .. \
-	&& python3 setup.py install
-
-WORKDIR /pangolindemo/pangolin/python/examples
+	&& python3 setup.py install \
+	&& cd .. && rm -rf pangolin

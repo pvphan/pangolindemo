@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 WORKDIR /pangolindemo
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,7 +18,9 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-
         python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install pybind11 numpy PyOpenGL
+RUN pip install \
+	numpy==1.24.1 \
+	PyOpenGL==3.1.6
 
 RUN export GIT_SSL_NO_VERIFY=1 \
 	&& git clone https://github.com/pvphan/pangolin.git \

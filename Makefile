@@ -9,11 +9,17 @@ GUI_FLAGS:= \
 	-v ${REPO_PATH}:${WORKDIR_PATH}:ro \
 	-v /dev:/dev:ro \
 
+demo: build
+	${GUI_PREAMBLE} \
+	&& docker run \
+		${GUI_FLAGS} \
+		--rm \
+		${TAG_NAME} python3 simple_draw.py
+
 shell: build
 	${GUI_PREAMBLE} \
 	&& docker run \
 		${GUI_FLAGS} \
-		--privileged \
 		--rm -it \
 		${TAG_NAME} bash
 
